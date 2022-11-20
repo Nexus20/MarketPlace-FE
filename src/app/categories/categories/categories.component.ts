@@ -41,15 +41,4 @@ export class CategoriesComponent implements OnInit {
         this.store.dispatch(new AddCategory(this.categoryForm.value));
         this.categoryForm.reset();
     }
-
-    // private getCategories() {
-    //     this.categoryService.get().subscribe({
-    //         next: (data: ICategoryResult[]) => {
-    //             this.categories = data;
-    //         },
-    //         error: (error: HttpErrorResponse) => {
-    //             console.log(error);
-    //         }
-    //     });
-    // }
 }

@@ -8,6 +8,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import { ShopsComponent } from './shops/shops.component';
+import {MatTableModule} from "@angular/material/table";
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ShopsComponent } from './shops/shops.component';
     imports: [
         CommonModule,
         RouterModule.forChild([
+            {path: '', component: ShopsComponent},
             {path: 'register', component: ShopRegisterComponent},
         ]),
         ReactiveFormsModule,
@@ -25,6 +27,7 @@ import { ShopsComponent } from './shops/shops.component';
         MatIconModule,
         MatInputModule,
         MatButtonModule,
+        MatTableModule,
     ]
 })
 export class ShopsModule { }

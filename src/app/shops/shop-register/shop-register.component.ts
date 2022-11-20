@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngxs/store";
-import {AddCategory} from "../../categories/category.action";
 import {AddShop} from "../shop.action";
 
 @Component({
