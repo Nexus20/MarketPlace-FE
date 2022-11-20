@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Register shop</h2>
+        </div>
+        <div class="col-12">
+            <form [formGroup]="registerForm" (ngSubmit)="registerShop()">
+                <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Shop name</mat-label>
+                    <input matInput placeholder="Shop name" formControlName="name">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                </mat-form-field>
+                </div>
+                <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Shop email</mat-label>
+                    <input matInput placeholder="Shop email" formControlName="email">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                </mat-form-field>
+                </div>
+                <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Shop phone</mat-label>
+                    <input matInput placeholder="Shop phone" formControlName="phone">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                </mat-form-field>
+                </div>
+                <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Shop password</mat-label>
+                    <input matInput type="password" placeholder="Shop password" formControlName="password">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                </mat-form-field>
+                </div>
+                <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Shop address</mat-label>
+                    <input matInput placeholder="Shop address" formControlName="address">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                </mat-form-field>
+                </div>
+                <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Shop siteUrl</mat-label>
+                    <input matInput placeholder="Shop siteUrl" formControlName="siteUrl">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                </mat-form-field>
+                </div>
+                <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Shop description</mat-label>
+                    <textarea matInput placeholder="Shop description" formControlName="description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="10"></textarea>
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                </mat-form-field>
+                </div>
+                <button mat-raised-button color="primary" type="submit" class="btn btn-primary btn-sm mt-2">Register shop</button>
+            </form>
+        </div>
+    </div>
+</div>
