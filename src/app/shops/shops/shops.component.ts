@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Select, Store} from "@ngxs/store";
 import {Observable} from "rxjs";
 import {IShopResult} from "../models/IShopResult";
-import {ShopsState} from "../shops.state";
-import {GetShops} from "../shop.action";
+import {ShopsState} from "../state/shops.state";
+import {GetShops} from "../state/shop.action";
 
 @Component({
   selector: 'app-shops',

@@ -1,13 +1,9 @@
 import {Action, Selector, State, StateContext} from "@ngxs/store";
 import {Injectable} from "@angular/core";
 import {tap} from "rxjs";
-import {IShopResult} from "./models/IShopResult";
-import {ShopService} from "./shop.service";
-import {AddShop, DeleteShop, GetShops, UpdateShop} from "./shop.action";
-
-export class ShopsStateModel {
-    shops!: IShopResult[]
-}
+import {ShopService} from "../shop.service";
+import {AddShop, DeleteShop, GetShopProducts, GetShops, UpdateShop} from "./shop.action";
+import {ShopsStateModel} from "./shops.model";
 
 @State<ShopsStateModel>({
     name: 'shopsState',
@@ -26,15 +22,42 @@ export class ShopsState {
         return state.shops;
     }
 
-    @Action(GetShops)
-    getDataFromState(ctx: StateContext<ShopsStateModel>) {
+    @Selector()
+    static selectShopById(state:ShopsStateModel) {
+        return (shopId: string) => {
+            return state.shops.filter(x => x.id == shopId)[0];
+        }
+    }
 
-        return this._shopService.get().pipe(tap(returnData => {
+    @Action(GetShops)
+    getDataFromState(ctx: StateContext<ShopsStateModel>, {queryParams} : GetShops) {
+
+        return this._shopService.get(queryParams).pipe(tap(returnData => {
             const state = ctx.getState();
 
             ctx.setState({
                 ...state,
                 shops: returnData
+            });
+        }))
+    }
+
+    @Action(GetShopProducts)
+    getGetShopProductsFromState(ctx: StateContext<ShopsStateModel>, {queryParams} : GetShopProducts) {
+        return this._shopService.getShopProducts(queryParams).pipe(tap(returnData => {
+
+            if(returnData.length == 0)
+                return;
+
+            const state = ctx.getState();
+            const shops = [...state.shops];
+
+            const idx = shops.findIndex(x => x.id == returnData[0].shopId);
+            shops[idx].products = returnData;
+
+            ctx.setState({
+                ...state,
+                shops: shops,
             });
         }))
     }

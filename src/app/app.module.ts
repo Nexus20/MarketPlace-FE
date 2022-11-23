@@ -11,12 +11,17 @@ import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {CategoriesState} from "./categories/categories.state";
 import {CategoryService} from "./categories/category.service";
 import {ShopService} from "./shops/shop.service";
-import {ShopsState} from "./shops/shops.state";
+import {ShopsState} from "./shops/state/shops.state";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AuthState} from "./users/state/auth.state";
 import {UserService} from "./users/user.service";
 import {InterceptorModule} from "./core/interceptors/interceptor.module";
 import {NgxsStoragePluginModule} from "@ngxs/storage-plugin";
+import {JwtModule} from "@auth0/angular-jwt";
+
+export function tokenGetter() {
+    return localStorage.getItem("token");
+}
 
 @NgModule({
     declarations: [
@@ -35,7 +40,13 @@ import {NgxsStoragePluginModule} from "@ngxs/storage-plugin";
             key: ['auth'],
         }),
         NgxsLoggerPluginModule.forRoot(),
-        NgxsReduxDevtoolsPluginModule.forRoot()
+        NgxsReduxDevtoolsPluginModule.forRoot(),
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: tokenGetter,
+                allowedDomains: ["localhost:7229"],
+            }
+        })
     ],
     providers: [CategoryService, ShopService, UserService],
     bootstrap: [AppComponent]

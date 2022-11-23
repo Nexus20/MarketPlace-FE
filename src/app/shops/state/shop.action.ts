@@ -1,6 +1,13 @@
 //Read
 export class GetShops {
     static readonly type = '[Shops] Fetch';
+    constructor(public queryParams?: {}) {}
+}
+
+export class GetShopProducts {
+    static readonly type = '[Shops] GetProducts'
+    constructor(public queryParams?: {}) {
+    }
 }
 
 //Create

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngxs/store";
-import {AddShop} from "../shop.action";
+import {AddShop} from "../state/shop.action";
 
 @Component({
   selector: 'app-shop-register',
