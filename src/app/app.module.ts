@@ -18,6 +18,8 @@ import {UserService} from "./users/user.service";
 import {InterceptorModule} from "./core/interceptors/interceptor.module";
 import {NgxsStoragePluginModule} from "@ngxs/storage-plugin";
 import {JwtModule} from "@auth0/angular-jwt";
+import {ProductService} from "./products/product.service";
+import {ProductsState} from "./products/state/products.state";
 
 export function tokenGetter() {
     return localStorage.getItem("token");
@@ -25,7 +27,7 @@ export function tokenGetter() {
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     imports: [
         InterceptorModule,
@@ -35,7 +37,7 @@ export function tokenGetter() {
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        NgxsModule.forRoot([CategoriesState, ShopsState, AuthState]),
+        NgxsModule.forRoot([CategoriesState, ShopsState, AuthState, ProductsState]),
         NgxsStoragePluginModule.forRoot({
             key: ['auth'],
         }),
@@ -48,7 +50,7 @@ export function tokenGetter() {
             }
         })
     ],
-    providers: [CategoryService, ShopService, UserService],
+    providers: [CategoryService, ShopService, UserService, ProductService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

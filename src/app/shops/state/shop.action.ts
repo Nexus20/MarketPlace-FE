@@ -4,9 +4,9 @@ export class GetShops {
     constructor(public queryParams?: {}) {}
 }
 
-export class GetShopProducts {
-    static readonly type = '[Shops] GetProducts'
-    constructor(public queryParams?: {}) {
+export class GetShopById {
+    static readonly type = '[Shops] GetById';
+    constructor(public id: string) {
     }
 }
 

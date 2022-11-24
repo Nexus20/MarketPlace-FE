@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Add new product</h2>
+        </div>
+        <div class="col-12">
+            <form [formGroup]="editProductForm" (ngSubmit)="submitForm()">
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Product name</mat-label>
+                        <input matInput placeholder="Product name" formControlName="name" value="{{productInfo.name}}">
+                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                        <mat-hint>Hint</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Product price</mat-label>
+                        <input matInput placeholder="Product price" formControlName="price" value="{{productInfo.price}}">
+                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                        <mat-hint>Hint</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Product discount</mat-label>
+                        <input matInput placeholder="Product discount" type="number" formControlName="discount" value="{{productInfo.discount}}">
+                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                        <mat-hint>Hint</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Product count</mat-label>
+                        <input matInput placeholder="Product name" type="number" formControlName="count" value="{{productInfo.count}}">
+                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                        <mat-hint>Hint</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Product description</mat-label>
+                        <textarea matInput placeholder="Product description" formControlName="description" value="{{productInfo.description}}" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="10"></textarea>
+                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                        <mat-hint>Hint</mat-hint>
+                    </mat-form-field>
+                </div>
+                <button mat-raised-button color="primary" type="submit" class="btn btn-primary btn-sm mt-2" [disabled]="!editProductForm.valid">Update product</button>
+            </form>
+        </div>
+    </div>
+</div>

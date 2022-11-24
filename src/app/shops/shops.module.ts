@@ -10,19 +10,26 @@ import {MatButtonModule} from "@angular/material/button";
 import { ShopsComponent } from './shops/shops.component';
 import {MatTableModule} from "@angular/material/table";
 import { ShopProductsComponent } from './shop-products/shop-products.component';
+import {ShopCreateProductComponent} from "./shop-create-product/shop-create-product.component";
+import { ShopUpdateProductComponent } from './shop-update-product/shop-update-product.component';
 
 
 @NgModule({
   declarations: [
     ShopRegisterComponent,
     ShopsComponent,
-    ShopProductsComponent
+    ShopProductsComponent,
+      ShopCreateProductComponent,
+      ShopUpdateProductComponent,
   ],
     imports: [
         CommonModule,
         RouterModule.forChild([
             {path: '', component: ShopsComponent},
             {path: 'register', component: ShopRegisterComponent},
+            {path: 'products', component: ShopProductsComponent},
+            {path: 'products/add', component: ShopCreateProductComponent},
+            {path: 'products/:id/edit', component: ShopUpdateProductComponent},
         ]),
         ReactiveFormsModule,
         MatFormFieldModule,

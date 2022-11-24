@@ -1,9 +1,10 @@
-import {Action, Selector, State, StateContext} from "@ngxs/store";
+import {Action, Selector, State, StateContext, Store} from "@ngxs/store";
 import {Injectable} from "@angular/core";
 import {tap} from "rxjs";
 import {ShopService} from "../shop.service";
-import {AddShop, DeleteShop, GetShopProducts, GetShops, UpdateShop} from "./shop.action";
+import {AddShop, DeleteShop, GetShopById, GetShops, UpdateShop} from "./shop.action";
 import {ShopsStateModel} from "./shops.model";
+import {ProductService} from "../../products/product.service";
 
 @State<ShopsStateModel>({
     name: 'shopsState',
@@ -15,7 +16,7 @@ import {ShopsStateModel} from "./shops.model";
 @Injectable()
 export class ShopsState {
 
-    constructor(private _shopService: ShopService) {}
+    constructor(private store: Store, private _shopService: ShopService, private _productService: ProductService) {}
 
     @Selector()
     static selectStateData(state:ShopsStateModel){
@@ -42,24 +43,15 @@ export class ShopsState {
         }))
     }
 
-    @Action(GetShopProducts)
-    getGetShopProductsFromState(ctx: StateContext<ShopsStateModel>, {queryParams} : GetShopProducts) {
-        return this._shopService.getShopProducts(queryParams).pipe(tap(returnData => {
+    @Action(GetShopById)
+    getShopByIdFromState(ctx: StateContext<ShopsStateModel>, { id } : GetShopById) {
+        return this._shopService.getById(id).pipe(tap(returnData => {
+            const state=ctx.getState();
 
-            if(returnData.length == 0)
-                return;
-
-            const state = ctx.getState();
-            const shops = [...state.shops];
-
-            const idx = shops.findIndex(x => x.id == returnData[0].shopId);
-            shops[idx].products = returnData;
-
-            ctx.setState({
-                ...state,
-                shops: shops,
-            });
-        }))
+            ctx.patchState({
+                shops:[...state.shops, returnData]
+            })
+        }));
     }
 
     @Action(AddShop)
@@ -80,7 +72,7 @@ export class ShopsState {
 
             const state=ctx.getState();
             const shops = [...state.shops];
-            shops[i]=payload;
+            shops[i]=returnData;
 
             ctx.setState({
                 ...state,
