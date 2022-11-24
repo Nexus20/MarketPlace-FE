@@ -26,6 +26,11 @@ export class ProductsState {
     constructor(private store: Store, private _productService: ProductService, private _shopService: ShopService) {}
 
     @Selector()
+    static selectAllProductsFromState(state: ProductsStateModel) {
+        return state.products;
+    }
+
+    @Selector()
     static selectShopProducts(state:ProductsStateModel) {
         return (shopId: string) => {
             return state.products.filter(x => x.shopId == shopId);

@@ -6,9 +6,9 @@ import {ShopsState} from "../state/shops.state";
 import {GetShops} from "../state/shop.action";
 
 @Component({
-  selector: 'app-shops',
-  templateUrl: './shops.component.html',
-  styleUrls: ['./shops.component.scss']
+    selector: 'app-shops',
+    templateUrl: './shops.component.html',
+    styleUrls: ['./shops.component.scss']
 })
 export class ShopsComponent implements OnInit {
 
@@ -17,14 +17,12 @@ export class ShopsComponent implements OnInit {
     @Select(ShopsState.selectStateData) shopsInfo!: Observable<any>;
 
     constructor(private store: Store) {
+    }
 
+    ngOnInit(): void {
         this.store.dispatch(new GetShops());
         this.shopsInfo.subscribe((returnData) => {
             this.shops = returnData;
         })
     }
-
-    ngOnInit(): void {
-    }
-
 }

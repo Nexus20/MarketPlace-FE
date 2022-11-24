@@ -20,6 +20,7 @@ import {NgxsStoragePluginModule} from "@ngxs/storage-plugin";
 import {JwtModule} from "@auth0/angular-jwt";
 import {ProductService} from "./products/product.service";
 import {ProductsState} from "./products/state/products.state";
+import {BasketState} from "./basket/state/basket.state";
 
 export function tokenGetter() {
     return localStorage.getItem("token");
@@ -37,9 +38,9 @@ export function tokenGetter() {
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        NgxsModule.forRoot([CategoriesState, ShopsState, AuthState, ProductsState]),
+        NgxsModule.forRoot([CategoriesState, ShopsState, AuthState, ProductsState, BasketState]),
         NgxsStoragePluginModule.forRoot({
-            key: ['auth'],
+            key: ['auth', 'basket'],
         }),
         NgxsLoggerPluginModule.forRoot(),
         NgxsReduxDevtoolsPluginModule.forRoot(),
