@@ -3,3 +3,4 @@ export interface ILoginResponse {
     errorMessage: string,
     token: string
 }
+

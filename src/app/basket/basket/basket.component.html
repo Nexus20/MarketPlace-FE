@@ -1,1 +1,81 @@
-<p>basket works!</p>
+<app-header></app-header>
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-12">
+            <ng-container *ngFor="let basketItem of basketItems">
+                <div class="card">
+                    <div class="card-header">
+                        Your orders from shop {{basketItem.shopId}}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <ng-container *ngFor="let shopOrderItem of basketItem.orderItems">
+                                <div class="col-4 col-xs-12">
+                                    <div class="card car-card" style="margin: 15px;">
+                                        <div class="card-body">
+                                            <h3 class="card-title">{{shopOrderItem.product.name}}</h3>
+                                            <div class="row">
+                                                <div class="col-sm-12 fotorama" data-height="300" data-nav="thumbs"
+                                                     style="display: flex; -o-justify-content: center; -webkit-justify-content: center; justify-content: center;">
+                                                    <!--                                @if (item.Photos.Count > 0) {-->
+
+                                                    <!--                                @foreach (var photo in item.Photos) {-->
+                                                    <!--                                <img src="@photo.Path" alt="">-->
+                                                    <!--                                }-->
+                                                    <!--                                }-->
+                                                    <!--                                else {-->
+                                                    <!--                                <img src="/img/no-image.jpg" alt="" style="height: 300px">-->
+                                                    <!--                                }-->
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-12 mb-2">
+                                                    Description:
+                                                </div>
+                                                <div class="col-12">
+                                                    {{shopOrderItem.product.description}}
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <div class="col-12 mb-2">
+                                                    Count:
+                                                </div>
+                                                <div class="col-12">
+                                                    <button class="btn btn-outline-primary"
+                                                            [disabled]="shopOrderItem.count == 1"
+                                                            (click)="changeOrderItemCount(basketItem.shopId, shopOrderItem.product.id, shopOrderItem.count-1)">
+                                                        -
+                                                    </button>
+                                                    {{shopOrderItem.count}}
+                                                    <button class="btn btn-outline-primary"
+                                                            (click)="changeOrderItemCount(basketItem.shopId, shopOrderItem.product.id, shopOrderItem.count+1)">
+                                                        +
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 d-flex justify-content-between">
+                                                    <a class="btn btn-primary"
+                                                       [routerLink]="['/products/' + shopOrderItem.product.id]">Details</a>
+                                                    <button class="btn btn-danger"
+                                                            (click)="removeItemFromBasket(basketItem.shopId, shopOrderItem.product.id)">
+                                                        Remove item
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-primary" [routerLink]="[basketItem.shopId+'/checkout']">Proceed to checkout</a>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

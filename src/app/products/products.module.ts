@@ -9,6 +9,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
 import { ProductViewComponent } from './product-view/product-view.component';
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { ProductViewComponent } from './product-view/product-view.component';
         MatInputModule,
         MatButtonModule,
         MatTableModule,
+        SharedModule,
     ]
 })
 

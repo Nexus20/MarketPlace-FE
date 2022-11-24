@@ -10,13 +10,13 @@ export class AddItemToBasket {
 export class RemoveItemFromBasket {
     static readonly type = '[Basket] RemoveItem';
 
-    constructor(public payload: any) {
+    constructor(public payload: { shopId: string, productId: string }) {
     }
 }
 
 export class ChangeItemCount {
     static readonly type = '[Basket] ChangeItemCount';
 
-    constructor(public payload: { email: string, password: string }) {
+    constructor(public payload: { shopId: string, productId: string, newCount: number }) {
     }
 }

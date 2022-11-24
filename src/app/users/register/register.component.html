@@ -1,0 +1,50 @@
+<app-header></app-header>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Your firstname</mat-label>
+                            <input matInput placeholder="Your firstname" formControlName="firstname">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Your lastname</mat-label>
+                            <input matInput placeholder="Your lastname" formControlName="lastname">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Your email</mat-label>
+                            <input matInput placeholder="Your email" formControlName="email">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Your phone</mat-label>
+                            <input matInput placeholder="Your phone" formControlName="phone">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password" placeholder="Password" formControlName="password">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Confirm password</mat-label>
+                            <input matInput type="password" placeholder="Confirm password" formControlName="confirmPassword">
+                        </mat-form-field>
+                    </div>
+                    <button mat-raised-button color="primary" type="submit" class="btn btn-primary btn-sm mt-2"
+                            [disabled]="!registerForm.valid">Create account
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

@@ -8,16 +8,20 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
+import {SharedModule} from "../shared/shared.module";
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 @NgModule({
     declarations: [
-        BasketComponent
+        BasketComponent,
+        CheckoutComponent
     ],
     imports: [
         CommonModule,
         RouterModule.forChild([
             {path: '', component: BasketComponent},
+            {path: ':shop-id/checkout', component: CheckoutComponent},
         ]),
         ReactiveFormsModule,
         MatFormFieldModule,
@@ -25,6 +29,7 @@ import {MatTableModule} from "@angular/material/table";
         MatInputModule,
         MatButtonModule,
         MatTableModule,
+        SharedModule,
     ]
 })
 export class BasketModule {

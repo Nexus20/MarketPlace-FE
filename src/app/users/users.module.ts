@@ -7,11 +7,14 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
+import {RegisterComponent} from './register/register.component';
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
     declarations: [
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     imports: [
         CommonModule,
@@ -22,7 +25,9 @@ import {RouterModule} from "@angular/router";
         ReactiveFormsModule,
         RouterModule.forChild([
             {path: 'login', component: LoginComponent},
+            {path: 'register', component: RegisterComponent},
         ]),
+        SharedModule,
     ]
 })
 export class UsersModule {
