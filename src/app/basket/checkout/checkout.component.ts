@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngxs/store";
 import {IBasketItem} from "../models/IBasketItem";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {map} from "rxjs";
 import {BasketState} from "../state/basket.state";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {PlaceOrder} from "../../orders/state/order.action";
+import {ClearBasket} from "../state/basket.action";
 
 @Component({
     selector: 'app-checkout',
@@ -17,7 +19,7 @@ export class CheckoutComponent implements OnInit {
     checkoutForm!: FormGroup;
     private shopId!: string;
 
-    constructor(private route: ActivatedRoute, private store: Store, private formBuilder: FormBuilder) {
+    constructor(private route: ActivatedRoute, private store: Store, private formBuilder: FormBuilder, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -35,23 +37,36 @@ export class CheckoutComponent implements OnInit {
         });
     }
 
-    private createForm() : void {
+    submitForm() {
+        if (!this.checkoutForm.valid)
+            return;
+
+        const payload = {
+            shopId: this.shopId,
+            country: this.checkoutForm.value["country"],
+            city: this.checkoutForm.value["city"],
+            address: this.checkoutForm.value["address"],
+            comment: this.checkoutForm.value["comment"],
+            orderItems: this.basketItem.orderItems.map(x => ({
+                count: x.count,
+                productId: x.product.id
+            }))
+        };
+
+        console.log(payload);
+
+        this.store.dispatch(new PlaceOrder(payload)).subscribe(() => {
+            this.store.dispatch(new ClearBasket());
+            this.router.navigate(['/user-profile/orders']);
+        });
+    }
+
+    private createForm(): void {
         this.checkoutForm = this.formBuilder.group({
-            firstname: new FormControl("", Validators.required),
-            lastname: new FormControl("", Validators.required),
-            phone: new FormControl("", Validators.required),
-            email: new FormControl("", [Validators.required, Validators.email]),
             country: new FormControl("", Validators.required),
             city: new FormControl("", Validators.required),
             address: new FormControl("", Validators.required),
             comment: new FormControl(""),
         });
-    }
-
-    submitForm() {
-        if(!this.checkoutForm.valid)
-            return;
-
-        console.log(this.checkoutForm.value);
     }
 }

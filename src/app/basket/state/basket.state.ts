@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Action, Selector, State, StateContext} from "@ngxs/store";
-import {AddItemToBasket, ChangeItemCount, RemoveItemFromBasket} from "./basket.action";
+import {AddItemToBasket, ChangeItemCount, ClearBasket, RemoveItemFromBasket} from "./basket.action";
 import {IBasketStateModel} from "./basket.model";
 import {IBasketItem} from "../models/IBasketItem";
 
@@ -23,6 +23,13 @@ export class BasketState {
         return (shopId: string) => {
             return state.items.filter(x => x.shopId == shopId)[0];
         }
+    }
+
+    @Action(ClearBasket)
+    clearBasket(ctx: StateContext<IBasketStateModel>, {}: ClearBasket) {
+        ctx.patchState({
+           items: []
+        });
     }
 
     @Action(AddItemToBasket)

@@ -20,3 +20,7 @@ export class ChangeItemCount {
     constructor(public payload: { shopId: string, productId: string, newCount: number }) {
     }
 }
+
+export class ClearBasket {
+    static readonly type = '[Basket] Clear';
+}

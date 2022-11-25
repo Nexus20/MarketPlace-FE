@@ -13,6 +13,7 @@ import {ShopProductsComponent} from './shop-products/shop-products.component';
 import {ShopCreateProductComponent} from "./shop-create-product/shop-create-product.component";
 import {ShopUpdateProductComponent} from './shop-update-product/shop-update-product.component';
 import {ShopViewProductComponent} from './shop-view-product/shop-view-product.component';
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import {ShopViewProductComponent} from './shop-view-product/shop-view-product.co
         MatInputModule,
         MatButtonModule,
         MatTableModule,
+        SharedModule,
     ]
 })
 export class ShopsModule {
