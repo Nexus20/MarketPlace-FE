@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngxs/store";
 import {AddShop} from "../state/shop.action";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-shop-register',
@@ -11,7 +12,7 @@ import {AddShop} from "../state/shop.action";
 export class ShopRegisterComponent implements OnInit {
     registerForm!: FormGroup;
 
-    constructor(private store: Store, private formBuilder: FormBuilder ) {}
+    constructor(private store: Store, private formBuilder: FormBuilder, private router: Router) {}
 
     ngOnInit(): void {
         this.registerForm = this.formBuilder.group({
@@ -27,7 +28,9 @@ export class ShopRegisterComponent implements OnInit {
 
     registerShop() {
         console.log(this.registerForm.value);
-        this.store.dispatch(new AddShop(this.registerForm.value));
-        this.registerForm.reset();
+        this.store.dispatch(new AddShop(this.registerForm.value)).subscribe(() => {
+            this.registerForm.reset();
+            this.router.navigate(['/users/login'])
+        });
     }
 }

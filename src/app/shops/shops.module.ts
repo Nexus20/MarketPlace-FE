@@ -14,6 +14,7 @@ import {ShopCreateProductComponent} from "./shop-create-product/shop-create-prod
 import {ShopUpdateProductComponent} from './shop-update-product/shop-update-product.component';
 import {ShopViewProductComponent} from './shop-view-product/shop-view-product.component';
 import {SharedModule} from "../shared/shared.module";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import {SharedModule} from "../shared/shared.module";
         MatButtonModule,
         MatTableModule,
         SharedModule,
+        MatSelectModule,
     ]
 })
 export class ShopsModule {

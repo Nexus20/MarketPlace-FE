@@ -1,11 +1,48 @@
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            {{productInfo.id}} <br>
-            {{productInfo.name}} <br>
-            {{productInfo.description}} <br>
-            {{productInfo.price}} <br>
-            {{productInfo.count}} <br>
+<app-header></app-header>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card car-card" style="margin: 15px;">
+                    <div class="card-body">
+                        <h3 class="card-title">{{productInfo.name}}</h3>
+                        <div class="row">
+                            <div class="col-sm-12 fotorama" data-height="300" data-nav="thumbs" style="display: flex; -o-justify-content: center; -webkit-justify-content: center; justify-content: center;">
+                                <!--                                @if (item.Photos.Count > 0) {-->
+
+                                <!--                                @foreach (var photo in item.Photos) {-->
+                                <!--                                <img src="@photo.Path" alt="">-->
+                                <!--                                }-->
+                                <!--                                }-->
+                                <!--                                else {-->
+                                <!--                                <img src="/img/no-image.jpg" alt="" style="height: 300px">-->
+                                <!--                                }-->
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12 mb-2">
+                                Description:
+                            </div>
+                            <div class="col-12">
+                                {{productInfo.description}}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <a class="btn btn-primary" [routerLink]="['edit']">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+<!--                {{productInfo.id}} <br>-->
+<!--                {{productInfo.name}} <br>-->
+<!--                {{productInfo.description}} <br>-->
+<!--                {{productInfo.price}} <br>-->
+<!--                {{productInfo.count}} <br>-->
+            </div>
         </div>
     </div>
-</div>
+</main>

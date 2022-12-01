@@ -4,8 +4,11 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {IProductResult} from "../../products/models/IProductResult";
 import {AddShopProduct, GetShopProducts, UpdateProduct} from "../../products/state/product.action";
 import {ProductsState} from "../../products/state/products.state";
-import {map} from "rxjs";
-import {Store} from "@ngxs/store";
+import {map, Observable} from "rxjs";
+import {Select, Store} from "@ngxs/store";
+import {ICategoryResult} from "../../categories/models/ICategoryResult";
+import {CategoriesState} from "../../categories/categories.state";
+import {GetCategories} from "../../categories/category.action";
 
 @Component({
   selector: 'app-shop-update-product',
@@ -17,6 +20,9 @@ export class ShopUpdateProductComponent implements OnInit {
     private productId!: string;
     productInfo!: IProductResult;
     editProductForm!: FormGroup;
+
+    categories!: ICategoryResult[];
+    @Select(CategoriesState.selectStateData) categoriesSelector!: Observable<ICategoryResult[]>;
 
     constructor(private route: ActivatedRoute,
                 private formBuilder: FormBuilder,
@@ -44,13 +50,19 @@ export class ShopUpdateProductComponent implements OnInit {
     }
 
     private createForm() : void {
+
+        this.store.dispatch(new GetCategories());
+        this.categoriesSelector.subscribe((returnData) => {
+            this.categories = returnData;
+        })
+
         this.editProductForm = this.formBuilder.group({
             name: new FormControl(this.productInfo.name, Validators.required),
             description: new FormControl(this.productInfo.description),
             price: new FormControl(this.productInfo.price, [Validators.required, Validators.min(0)]),
             discount: new FormControl(this.productInfo.discount, [Validators.max(100)]),
             count: new FormControl(this.productInfo.count, [Validators.min(0)]),
-            categoriesIds: new FormControl([]),
+            categoriesIds: new FormControl(this.productInfo.categories?.map(x => x.id)),
             // name: new FormControl("", Validators.required),
             // description: new FormControl(),
             // price: new FormControl(0, [Validators.required, Validators.min(0)]),
