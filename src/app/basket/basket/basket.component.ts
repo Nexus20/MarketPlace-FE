@@ -6,9 +6,9 @@ import {IBasketItem} from "../models/IBasketItem";
 import {ChangeItemCount, RemoveItemFromBasket} from "../state/basket.action";
 
 @Component({
-  selector: 'app-basket',
-  templateUrl: './basket.component.html',
-  styleUrls: ['./basket.component.scss']
+    selector: 'app-basket',
+    templateUrl: './basket.component.html',
+    styleUrls: ['./basket.component.scss']
 })
 export class BasketComponent implements OnInit {
 

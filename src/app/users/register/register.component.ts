@@ -1,16 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Store} from "@ngxs/store";
 import {UserService} from "../user.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit {
 
     registerForm!: FormGroup;
 
@@ -21,7 +20,7 @@ export class RegisterComponent implements OnInit{
         this.createForm();
     }
 
-    private createForm() : void {
+    private createForm(): void {
         this.registerForm = this.formBuilder.group({
             firstname: new FormControl("", Validators.required),
             lastname: new FormControl("", Validators.required),
@@ -33,7 +32,7 @@ export class RegisterComponent implements OnInit{
     }
 
     submitForm() {
-        if(!this.registerForm.valid)
+        if (!this.registerForm.valid)
             return;
 
         console.log(this.registerForm.value);

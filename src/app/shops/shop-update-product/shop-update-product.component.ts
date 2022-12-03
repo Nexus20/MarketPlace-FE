@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {IProductResult} from "../../products/models/IProductResult";
-import {AddShopProduct, GetShopProducts, UpdateProduct} from "../../products/state/product.action";
+import {AddProductPhotos, GetShopProducts, UpdateProduct} from "../../products/state/product.action";
 import {ProductsState} from "../../products/state/products.state";
 import {map, Observable} from "rxjs";
 import {Select, Store} from "@ngxs/store";
@@ -11,15 +11,16 @@ import {CategoriesState} from "../../categories/categories.state";
 import {GetCategories} from "../../categories/category.action";
 
 @Component({
-  selector: 'app-shop-update-product',
-  templateUrl: './shop-update-product.component.html',
-  styleUrls: ['./shop-update-product.component.scss']
+    selector: 'app-shop-update-product',
+    templateUrl: './shop-update-product.component.html',
+    styleUrls: ['./shop-update-product.component.scss']
 })
 export class ShopUpdateProductComponent implements OnInit {
 
     private productId!: string;
     productInfo!: IProductResult;
     editProductForm!: FormGroup;
+    selectedFiles?: FileList;
 
     categories!: ICategoryResult[];
     @Select(CategoriesState.selectStateData) categoriesSelector!: Observable<ICategoryResult[]>;
@@ -49,7 +50,7 @@ export class ShopUpdateProductComponent implements OnInit {
         });
     }
 
-    private createForm() : void {
+    private createForm(): void {
 
         this.store.dispatch(new GetCategories());
         this.categoriesSelector.subscribe((returnData) => {
@@ -78,5 +79,22 @@ export class ShopUpdateProductComponent implements OnInit {
             console.log("Product added");
             this.router.navigate(['/shops/products']);
         });
+    }
+
+    selectFiles(event: any): void {
+        this.selectedFiles = event.target.files;
+        console.log(this.selectedFiles);
+    }
+
+    uploadFiles(): void {
+        const formData = new FormData();
+        for (let i = 0; i < this.selectedFiles!.length; i++)
+            formData.append(`files[${i}]`, this.selectedFiles![i], this.selectedFiles![i].name);
+        console.log(formData);
+
+        this.store.dispatch(new AddProductPhotos(this.productId, formData))
+            .subscribe(() => {
+                console.log("Files added");
+            });
     }
 }

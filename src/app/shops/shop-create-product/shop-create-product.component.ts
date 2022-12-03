@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Select, Store} from "@ngxs/store";
 import {Router} from "@angular/router";
-import {AuthState} from "../../users/state/auth.state";
 import {AddShopProduct} from "../../products/state/product.action";
 import {CategoriesState} from "../../categories/categories.state";
 import {Observable} from "rxjs";
@@ -10,12 +9,12 @@ import {ICategoryResult} from "../../categories/models/ICategoryResult";
 import {GetCategories} from "../../categories/category.action";
 
 @Component({
-  selector: 'app-shop-create-product',
-  templateUrl: './shop-create-product.component.html',
-  styleUrls: ['./shop-create-product.component.scss']
+    selector: 'app-shop-create-product',
+    templateUrl: './shop-create-product.component.html',
+    styleUrls: ['./shop-create-product.component.scss']
 })
 
-export class ShopCreateProductComponent implements OnInit{
+export class ShopCreateProductComponent implements OnInit {
 
     addProductForm!: FormGroup;
     categories!: ICategoryResult[];
@@ -28,7 +27,7 @@ export class ShopCreateProductComponent implements OnInit{
         this.createForm();
     }
 
-    private createForm() : void {
+    private createForm(): void {
 
         this.store.dispatch(new GetCategories());
         this.categoriesInfo.subscribe((returnData) => {

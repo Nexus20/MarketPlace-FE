@@ -2,14 +2,28 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            {{productInfo.id}} <br>
-            {{productInfo.name}} <br>
-            {{productInfo.description}} <br>
-            {{productInfo.price}} <br>
-            {{productInfo.count}} <br>
+            <div class="card car-card" style="margin: 15px;">
+                <div class="card-body">
+                    <h3 class="card-title">{{productInfo.name}}</h3>
+                    <div class="row">
+                        <ng-container *ngIf="productInfo.photos != undefined && productInfo.photos.length">
+                            <app-carousel-holder [carouselParameters]="productInfo.photos"></app-carousel-holder>
+                        </ng-container>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 mb-2">
+                            Description:
+                        </div>
+                        <div class="col-12">
+                            {{productInfo.description}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-12">
-            <button mat-raised-button color="primary" type="submit" (click)="addToBasket()" class="btn btn-primary btn-sm mt-2">
+            <button mat-raised-button color="primary" type="submit" (click)="addToBasket()"
+                    class="btn btn-primary btn-sm mt-2">
                 Add to basket
             </button>
         </div>

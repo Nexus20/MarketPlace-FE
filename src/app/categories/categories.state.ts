@@ -19,10 +19,11 @@ export class CategoriesStateModel {
 @Injectable()
 export class CategoriesState {
 
-    constructor(private _categoryService: CategoryService) {}
+    constructor(private _categoryService: CategoryService) {
+    }
 
     @Selector()
-    static selectStateData(state:CategoriesStateModel){
+    static selectStateData(state: CategoriesStateModel) {
         return state.categories;
     }
 
@@ -40,24 +41,24 @@ export class CategoriesState {
     }
 
     @Action(AddCategory)
-    addDataToState(ctx: StateContext<CategoriesStateModel>, { payload }: AddCategory) {
+    addDataToState(ctx: StateContext<CategoriesStateModel>, {payload}: AddCategory) {
         return this._categoryService.create(payload).pipe(tap(returnData => {
-            const state=ctx.getState();
+            const state = ctx.getState();
 
             ctx.patchState({
-                categories:[...state.categories, returnData]
+                categories: [...state.categories, returnData]
             })
         }))
     }
 
     @Action(UpdateCategory)
-    updateDataOfState(ctx: StateContext<CategoriesStateModel>, { payload, id, i }: UpdateCategory) {
+    updateDataOfState(ctx: StateContext<CategoriesStateModel>, {payload, id, i}: UpdateCategory) {
 
         return this._categoryService.update(id, payload).pipe(tap(returnData => {
 
-            const state=ctx.getState();
+            const state = ctx.getState();
             const categories = [...state.categories];
-            categories[i]=payload;
+            categories[i] = payload;
 
             ctx.setState({
                 ...state,
@@ -67,12 +68,12 @@ export class CategoriesState {
     }
 
     @Action(DeleteCategory)
-    deleteDataFromState(ctx: StateContext<CategoriesStateModel>, { id }: DeleteCategory) {
+    deleteDataFromState(ctx: StateContext<CategoriesStateModel>, {id}: DeleteCategory) {
         return this._categoryService.delete(id).pipe(tap(returnData => {
-            const state=ctx.getState();
-            console.log("The is is",id)
+            const state = ctx.getState();
+            console.log("The is is", id)
             //Here we will create a new Array called filteredArray which won't contain the given id and set it equal to state.todo
-            const filteredArray = state.categories.filter((contents: { id: string; }) => contents.id!==id);
+            const filteredArray = state.categories.filter((contents: { id: string; }) => contents.id !== id);
 
             ctx.setState({
                 ...state,

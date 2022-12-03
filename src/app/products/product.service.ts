@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {IProductResult} from "./models/IProductResult";
+import {IProductPhotoResult} from "./models/IProductPhotoResult";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ProductService {
 
@@ -35,5 +36,9 @@ export class ProductService {
 
     public delete = (id: string) => {
         return this.httpClient.delete(`${this.api}product/${id}`);
+    }
+
+    public addPhotos(id: string, body: FormData) {
+        return this.httpClient.patch<IProductPhotoResult[]>(`${this.api}product/${id}/addphotos`, body);
     }
 }

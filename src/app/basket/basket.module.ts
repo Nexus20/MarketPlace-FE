@@ -9,7 +9,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
 import {SharedModule} from "../shared/shared.module";
-import { CheckoutComponent } from './checkout/checkout.component';
+import {CheckoutComponent} from './checkout/checkout.component';
 
 
 @NgModule({

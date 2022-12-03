@@ -16,22 +16,23 @@ import {ProductService} from "../../products/product.service";
 @Injectable()
 export class ShopsState {
 
-    constructor(private store: Store, private _shopService: ShopService, private _productService: ProductService) {}
+    constructor(private store: Store, private _shopService: ShopService, private _productService: ProductService) {
+    }
 
     @Selector()
-    static selectStateData(state:ShopsStateModel){
+    static selectStateData(state: ShopsStateModel) {
         return state.shops;
     }
 
     @Selector()
-    static selectShopById(state:ShopsStateModel) {
+    static selectShopById(state: ShopsStateModel) {
         return (shopId: string) => {
             return state.shops.filter(x => x.id == shopId)[0];
         }
     }
 
     @Action(GetShops)
-    getDataFromState(ctx: StateContext<ShopsStateModel>, {queryParams} : GetShops) {
+    getDataFromState(ctx: StateContext<ShopsStateModel>, {queryParams}: GetShops) {
 
         return this._shopService.get(queryParams).pipe(tap(returnData => {
             const state = ctx.getState();
@@ -44,35 +45,35 @@ export class ShopsState {
     }
 
     @Action(GetShopById)
-    getShopByIdFromState(ctx: StateContext<ShopsStateModel>, { id } : GetShopById) {
+    getShopByIdFromState(ctx: StateContext<ShopsStateModel>, {id}: GetShopById) {
         return this._shopService.getById(id).pipe(tap(returnData => {
-            const state=ctx.getState();
+            const state = ctx.getState();
 
             ctx.patchState({
-                shops:[...state.shops, returnData]
+                shops: [...state.shops, returnData]
             })
         }));
     }
 
     @Action(AddShop)
-    addDataToState(ctx: StateContext<ShopsStateModel>, { payload }: AddShop) {
+    addDataToState(ctx: StateContext<ShopsStateModel>, {payload}: AddShop) {
         return this._shopService.create(payload).pipe(tap(returnData => {
-            const state=ctx.getState();
+            const state = ctx.getState();
 
             ctx.patchState({
-                shops:[...state.shops, returnData]
+                shops: [...state.shops, returnData]
             })
         }))
     }
 
     @Action(UpdateShop)
-    updateDataOfState(ctx: StateContext<ShopsStateModel>, { payload, id, i }: UpdateShop) {
+    updateDataOfState(ctx: StateContext<ShopsStateModel>, {payload, id, i}: UpdateShop) {
 
         return this._shopService.update(id, payload).pipe(tap(returnData => {
 
-            const state=ctx.getState();
+            const state = ctx.getState();
             const shops = [...state.shops];
-            shops[i]=returnData;
+            shops[i] = returnData;
 
             ctx.setState({
                 ...state,
@@ -82,12 +83,12 @@ export class ShopsState {
     }
 
     @Action(DeleteShop)
-    deleteDataFromState(ctx: StateContext<ShopsStateModel>, { id }: DeleteShop) {
+    deleteDataFromState(ctx: StateContext<ShopsStateModel>, {id}: DeleteShop) {
         return this._shopService.delete(id).pipe(tap(returnData => {
-            const state=ctx.getState();
+            const state = ctx.getState();
             console.log("The is is", id)
             //Here we will create a new Array called filteredArray which won't contain the given id and set it equal to state.todo
-            const filteredArray = state.shops.filter((contents: { id: string; }) => contents.id!==id);
+            const filteredArray = state.shops.filter((contents: { id: string; }) => contents.id !== id);
 
             ctx.setState({
                 ...state,

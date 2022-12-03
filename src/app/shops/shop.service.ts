@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {IShopResult} from "./models/IShopResult";
 import {IProductResult} from "../products/models/IProductResult";
+import {IOrderResult} from "../orders/models/IOrderResult";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ShopService {
 
@@ -24,6 +25,10 @@ export class ShopService {
 
     public getShopProducts = (queryParams?: {}) => {
         return this.httpClient.get<IProductResult[]>(`${this.api}shop/GetOwnProducts`, {params: queryParams});
+    }
+
+    public getShopOrders = (queryParams?: {}) => {
+        return this.httpClient.get<IOrderResult[]>(`${this.api}shop/GetOwnOrders`, {params: queryParams});
     }
 
     public create = (body: FormData) => {

@@ -57,7 +57,7 @@ export class CheckoutComponent implements OnInit {
 
         this.store.dispatch(new PlaceOrder(payload)).subscribe(() => {
             this.store.dispatch(new ClearBasket());
-            this.router.navigate(['/user-profile/orders']);
+            this.router.navigate(['/buyer-profile/orders']);
         });
     }
 

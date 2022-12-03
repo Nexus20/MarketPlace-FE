@@ -6,7 +6,6 @@ import {AuthState} from "../../users/state/auth.state";
 import {environment} from "../../../environments/environment";
 
 
-
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 

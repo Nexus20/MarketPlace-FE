@@ -5,14 +5,15 @@ import {AddShop} from "../state/shop.action";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-shop-register',
-  templateUrl: './shop-register.component.html',
-  styleUrls: ['./shop-register.component.scss']
+    selector: 'app-shop-register',
+    templateUrl: './shop-register.component.html',
+    styleUrls: ['./shop-register.component.scss']
 })
 export class ShopRegisterComponent implements OnInit {
     registerForm!: FormGroup;
 
-    constructor(private store: Store, private formBuilder: FormBuilder, private router: Router) {}
+    constructor(private store: Store, private formBuilder: FormBuilder, private router: Router) {
+    }
 
     ngOnInit(): void {
         this.registerForm = this.formBuilder.group({

@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoryService} from "../category.service";
 import {ICategoryResult} from "../models/ICategoryResult";
-import {HttpErrorResponse} from "@angular/common/http";
 import {CategoriesState} from "../categories.state";
 import {Observable} from "rxjs";
 import {Select, Store} from "@ngxs/store";
@@ -20,7 +18,8 @@ export class CategoriesComponent implements OnInit {
     displayedColumns: string[] = ['id', 'name'];
     @Select(CategoriesState.selectStateData) categoriesInfo!: Observable<any>;
 
-    constructor(private store: Store, private formBuilder: FormBuilder) {}
+    constructor(private store: Store, private formBuilder: FormBuilder) {
+    }
 
     ngOnInit(): void {
 

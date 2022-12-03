@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header mb-3">
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container">
             <a class="navbar-brand" href="#">Navbar</a>
@@ -23,14 +23,16 @@
                             <a class="nav-link" [routerLink]="['/basket']">Basket</a>
                         </li>
                     </ng-template>
-                    <li class="nav-item">
-                        <ng-template [ngIf]="!isUserAuthenticated">
-                            <a class="nav-link" [routerLink]="['/users/login']">Login</a>
-                        </ng-template>
-                        <ng-template [ngIf]="isUserAuthenticated">
+
+                    <ng-template [ngIf]="!isUserAuthenticated">
+                        <li class="nav-item"><a class="nav-link" [routerLink]="['/users/login']">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" [routerLink]="['/users/register']">Register</a></li>
+                    </ng-template>
+                    <ng-template [ngIf]="isUserAuthenticated">
+                        <li class="nav-item">
                             <a class="nav-link" (click)="logout()">Logout</a>
-                        </ng-template>
-                    </li>
+                        </li>
+                    </ng-template>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">

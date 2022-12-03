@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Select, Store} from "@ngxs/store";
-import {ShopsState} from "../state/shops.state";
-import {map, Observable} from "rxjs";
+import {Store} from "@ngxs/store";
+import {map} from "rxjs";
 import {IShopResult} from "../models/IShopResult";
 import {AuthState} from "../../users/state/auth.state";
 import {IProductResult} from "../../products/models/IProductResult";
@@ -19,7 +18,6 @@ export class ShopProductsComponent implements OnInit {
 
     shopInfo!: IShopResult;
     shopProducts!: IProductResult[];
-    @Select(ShopsState.selectStateData) shopsInfo!: Observable<any>;
 
     constructor(private store: Store) {
     }

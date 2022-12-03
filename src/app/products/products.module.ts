@@ -8,7 +8,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
-import { ProductViewComponent } from './product-view/product-view.component';
+import {ProductViewComponent} from './product-view/product-view.component';
 import {SharedModule} from "../shared/shared.module";
 
 

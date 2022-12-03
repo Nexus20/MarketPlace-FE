@@ -19,6 +19,11 @@ export class BasketState {
     }
 
     @Selector()
+    static isEmpty(state: IBasketStateModel) {
+        return !state.items.length;
+    }
+
+    @Selector()
     static selectBasketPartByShopId(state: IBasketStateModel) {
         return (shopId: string) => {
             return state.items.filter(x => x.shopId == shopId)[0];
@@ -28,7 +33,7 @@ export class BasketState {
     @Action(ClearBasket)
     clearBasket(ctx: StateContext<IBasketStateModel>, {}: ClearBasket) {
         ctx.patchState({
-           items: []
+            items: []
         });
     }
 
@@ -81,7 +86,7 @@ export class BasketState {
         const basketItemIndex = state.items.findIndex(x => x.shopId == payload.shopId);
         const filteredOrderItems = state.items[basketItemIndex].orderItems.filter(x => x.product.id != payload.productId);
 
-        if(!filteredOrderItems.length)
+        if (!filteredOrderItems.length)
             state.items = state.items.filter(x => x.shopId != payload.shopId);
         else
             state.items[basketItemIndex].orderItems = filteredOrderItems;

@@ -8,13 +8,13 @@ import {map} from "rxjs";
 import {AddItemToBasket} from "../../basket/state/basket.action";
 
 @Component({
-  selector: 'app-product-view',
-  templateUrl: './product-view.component.html',
-  styleUrls: ['./product-view.component.scss']
+    selector: 'app-product-view',
+    templateUrl: './product-view.component.html',
+    styleUrls: ['./product-view.component.scss']
 })
 
 
-export class ProductViewComponent implements OnInit{
+export class ProductViewComponent implements OnInit {
 
     public productInfo!: IProductResult;
     private productId!: string;

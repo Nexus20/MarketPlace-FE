@@ -23,6 +23,7 @@ import {ProductsState} from "./products/state/products.state";
 import {BasketState} from "./basket/state/basket.state";
 import {OrdersState} from "./orders/state/order.state";
 import {OrderService} from "./orders/order.service";
+import {CarouselModule} from "ngx-owl-carousel-o";
 
 export function tokenGetter() {
     return localStorage.getItem("token");
@@ -36,6 +37,7 @@ export function tokenGetter() {
         InterceptorModule,
         BrowserModule,
         BrowserAnimationsModule,
+        CarouselModule,
         AppRoutingModule,
         HttpClientModule,
         FormsModule,

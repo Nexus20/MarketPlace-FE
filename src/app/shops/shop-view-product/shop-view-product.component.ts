@@ -7,9 +7,9 @@ import {ProductsState} from "../../products/state/products.state";
 import {map} from "rxjs";
 
 @Component({
-  selector: 'app-shop-view-product',
-  templateUrl: './shop-view-product.component.html',
-  styleUrls: ['./shop-view-product.component.scss']
+    selector: 'app-shop-view-product',
+    templateUrl: './shop-view-product.component.html',
+    styleUrls: ['./shop-view-product.component.scss']
 })
 
 export class ShopViewProductComponent implements OnInit {

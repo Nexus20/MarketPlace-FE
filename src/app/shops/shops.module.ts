@@ -15,6 +15,8 @@ import {ShopUpdateProductComponent} from './shop-update-product/shop-update-prod
 import {ShopViewProductComponent} from './shop-view-product/shop-view-product.component';
 import {SharedModule} from "../shared/shared.module";
 import {MatSelectModule} from "@angular/material/select";
+import {ShopOrdersComponent} from './shop-orders/shop-orders.component';
+import {ShopViewOrderComponent} from './shop-view-order/shop-view-order.component';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import {MatSelectModule} from "@angular/material/select";
         ShopCreateProductComponent,
         ShopUpdateProductComponent,
         ShopViewProductComponent,
+        ShopOrdersComponent,
+        ShopViewOrderComponent,
     ],
     imports: [
         CommonModule,
@@ -35,6 +39,8 @@ import {MatSelectModule} from "@angular/material/select";
             {path: 'products/add', component: ShopCreateProductComponent},
             {path: 'products/:id', component: ShopViewProductComponent},
             {path: 'products/:id/edit', component: ShopUpdateProductComponent},
+            {path: 'orders', component: ShopOrdersComponent},
+            {path: 'orders/:id', component: ShopViewOrderComponent},
         ]),
         ReactiveFormsModule,
         MatFormFieldModule,
