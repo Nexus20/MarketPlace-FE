@@ -1,4 +1,6 @@
 //Read
+import {OrderStatus} from "../enums/OrderStatus";
+
 export class GetOrders {
     static readonly type = '[Orders] Fetch';
 
@@ -13,8 +15,22 @@ export class GetOrderById {
     }
 }
 
+export class ChangeOrderStatus {
+    static readonly type = '[Orders] ChangeStatus';
+
+    constructor(public id: string, public newStatus: OrderStatus) {
+    }
+}
+
 export class GetShopOrders {
     static readonly type = '[Orders] GetShopOrders'
+
+    constructor(public queryParams?: {}) {
+    }
+}
+
+export class GetBuyerOrders {
+    static readonly type = '[Orders] GetBuyerOrders'
 
     constructor(public queryParams?: {}) {
     }

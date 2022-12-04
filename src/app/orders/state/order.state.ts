@@ -1,10 +1,19 @@
 import {Action, Selector, State, StateContext, Store} from "@ngxs/store";
 import {Injectable} from "@angular/core";
 import {tap} from "rxjs";
-import {DeleteOrder, GetOrderById, GetOrders, GetShopOrders, PlaceOrder, UpdateOrder} from "./order.action";
+import {
+    ChangeOrderStatus,
+    DeleteOrder, GetBuyerOrders,
+    GetOrderById,
+    GetOrders,
+    GetShopOrders,
+    PlaceOrder,
+    UpdateOrder
+} from "./order.action";
 import {OrdersStateModel} from "./order.model";
 import {OrderService} from "../order.service";
 import {ShopService} from "../../shops/shop.service";
+import {BuyerService} from "../../buyer-profile/buyer.service";
 
 @State<OrdersStateModel>({
     name: 'ordersState',
@@ -16,7 +25,7 @@ import {ShopService} from "../../shops/shop.service";
 @Injectable()
 export class OrdersState {
 
-    constructor(private store: Store, private _orderService: OrderService, private _shopService: ShopService) {
+    constructor(private store: Store, private _orderService: OrderService, private _shopService: ShopService, private _buyerService: BuyerService) {
     }
 
     @Selector()
@@ -32,6 +41,13 @@ export class OrdersState {
     }
 
     @Selector()
+    static selectBuyerOrders(state: OrdersStateModel) {
+        return (buyerId: string) => {
+            return state.orders.filter(x => x.buyerId == buyerId);
+        }
+    }
+
+    @Selector()
     static selectOrderById(state: OrdersStateModel) {
         return (orderId: string) => {
             return state.orders.filter(x => x.id == orderId)[0];
@@ -41,6 +57,21 @@ export class OrdersState {
     @Action(GetShopOrders)
     getShopOrdersFromState(ctx: StateContext<OrdersStateModel>, {queryParams}: GetShopOrders) {
         return this._shopService.getShopOrders(queryParams).pipe(tap(returnData => {
+            const state = ctx.getState();
+
+            ctx.setState({
+                ...state,
+                orders: returnData
+            });
+
+            if (returnData.length == 0)
+                return;
+        }))
+    }
+
+    @Action(GetBuyerOrders)
+    getBuyerOrdersFromState(ctx: StateContext<OrdersStateModel>, {queryParams}: GetBuyerOrders) {
+        return this._buyerService.getBuyerOrders(queryParams).pipe(tap(returnData => {
             const state = ctx.getState();
 
             ctx.setState({
@@ -85,6 +116,26 @@ export class OrdersState {
             ctx.patchState({
                 orders: [...state.orders, returnData]
             })
+        }));
+    }
+
+    @Action(ChangeOrderStatus)
+    changeOrderStatus(ctx: StateContext<OrdersStateModel>, {id, newStatus}: ChangeOrderStatus) {
+        console.log("Changing order status");
+
+        return this._orderService.changeStatus(id, newStatus).pipe(tap({
+            next: returnedStatus => {
+                const state = ctx.getState();
+                const orders = [...state.orders];
+                const index = orders.findIndex(x => x.id == id);
+                orders[index].status = returnedStatus;
+
+                ctx.setState({
+                    ...state,
+                    orders: orders,
+                });
+            },
+            error: () => {}
         }));
     }
 

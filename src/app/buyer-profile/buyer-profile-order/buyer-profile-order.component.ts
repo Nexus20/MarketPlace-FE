@@ -1,18 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {IOrderResult} from "../../orders/models/IOrderResult";
+import {OrderStatus} from "../../orders/enums/OrderStatus";
 import {ActivatedRoute} from "@angular/router";
 import {Store} from "@ngxs/store";
-import {map} from "rxjs";
-import {OrdersState} from "../../orders/state/order.state";
 import {ChangeOrderStatus, GetOrderById} from "../../orders/state/order.action";
-import {OrderStatus} from "../../orders/enums/OrderStatus";
+import {OrdersState} from "../../orders/state/order.state";
+import {map} from "rxjs";
 
 @Component({
-    selector: 'app-shop-view-order',
-    templateUrl: './shop-view-order.component.html',
-    styleUrls: ['./shop-view-order.component.scss']
+  selector: 'app-buyer-profile-order',
+  templateUrl: './buyer-profile-order.component.html',
+  styleUrls: ['./buyer-profile-order.component.scss']
 })
-export class ShopViewOrderComponent implements OnInit {
+export class BuyerProfileOrderComponent implements OnInit {
 
     public orderInfo!: IOrderResult;
     public isOrderNew!: boolean;

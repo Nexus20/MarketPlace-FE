@@ -14,12 +14,12 @@
                 <div class="row">
                     <div class="col-12 mb-4">
                         <div class="card">
-                            <div class="card-header">Client details</div>
+                            <div class="card-header">Shop details</div>
                             <div class="card-body">
                                 <div class="mb-2">
-                                    Name: {{orderInfo.buyer.firstName + ' ' + orderInfo.buyer.lastName}} </div>
-                                <div class="mb-2"> Email: {{orderInfo.buyer.email}} </div>
-                                <div> Phone: {{orderInfo.buyer.phone}} </div>
+                                    Name: {{orderInfo.shop.name}} </div>
+                                <div class="mb-2"> Email: {{orderInfo.shop.email}} </div>
+                                <div> Phone: {{orderInfo.shop.phone}} </div>
                             </div>
                             <div class="card-footer"></div>
                         </div>
@@ -42,13 +42,11 @@
                             <div class="card-body">
                                 <ng-container *ngIf="isOrderNew">
                                     <div class="d-flex justify-content-around">
-                                        <button class="btn btn-success" (click)="changeOrderStatus(orderStatus.Accepted)">Accept order</button>
                                         <button class="btn btn-danger" (click)="changeOrderStatus(orderStatus.Canceled)">Cancel order</button>
                                     </div>
                                 </ng-container>
                                 <ng-container *ngIf="isOrderAccepted">
                                     <div class="d-flex justify-content-around">
-                                        <button class="btn btn-success" (click)="changeOrderStatus(orderStatus.Sent)">Send order</button>
                                         <button class="btn btn-danger" (click)="changeOrderStatus(orderStatus.Canceled)">Cancel order</button>
                                     </div>
                                 </ng-container>

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {IOrderResult} from "./models/IOrderResult";
+import {OrderStatus} from "./enums/OrderStatus";
 
 @Injectable({
     providedIn: 'root'
@@ -31,5 +32,11 @@ export class OrderService {
 
     public delete = (id: string) => {
         return this.httpClient.delete(`${this.api}order/${id}`);
+    }
+
+    public changeStatus(id: string, newStatus: OrderStatus) {
+        return this.httpClient.patch<OrderStatus>(`${this.api}order/${id}/changeStatus`, {
+           newStatus: newStatus
+        });
     }
 }

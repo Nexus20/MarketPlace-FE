@@ -31,7 +31,7 @@ export interface IShopOrderResult extends IBaseResult {
 }
 
 export interface IBuyerResult extends IUserResult {
-    firstname: string;
-    lastname: string;
+    firstName: string;
+    lastName: string;
 }
 
